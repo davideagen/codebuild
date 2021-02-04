@@ -10,7 +10,7 @@ phases:
       java: corretto11
   pre_build:
     commands:
-      - curl -H 'Cache-Control: no-cache'  https://raw.githubusercontent.com/mdsol/fossa_ci_scripts/main/travis_ci/fossa_install.sh |  bash -s -- -b $TRAVIS_BUILD_DIR
+      - echo Nothing to do in the pre_build phase...
   build:
     commands:
       - echo Build started on `date`
