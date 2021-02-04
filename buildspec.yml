@@ -1,12 +1,16 @@
 version: 0.2
 
+env:
+  parameter-store:
+    FOSSA_API_KEY: "FOSSA_API_KEY"
+
 phases:
   install:
     runtime-versions:
       java: corretto11
   pre_build:
     commands:
-      - echo Nothing to do in the pre_build phase...
+      - curl -H 'Cache-Control: no-cache'  https://raw.githubusercontent.com/mdsol/fossa_ci_scripts/main/travis_ci/fossa_install.sh |  bash -s -- -b $TRAVIS_BUILD_DIR
   build:
     commands:
       - echo Build started on `date`
@@ -14,6 +18,7 @@ phases:
   post_build:
     commands:
       - echo Build completed on `date`
+      - bash sca.sh
 artifacts:
   files:
     - target/messageUtil-1.0.jar
